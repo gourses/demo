@@ -6,7 +6,7 @@ Minimal Go project to verify your develepment environment.
 ### Must have:
 - [Make](https://www.gnu.org/software/make/)
 - [Go](https://go.dev/) >= 1.13
-- Docker or Podman with compose for integration tests with [testecontainers](https://golang.testcontainers.org/)
+- Docker or Podman with compose for integration tests with [testcontainers](https://golang.testcontainers.org/)
 
 ### Optional:
 - awk for `make help`
