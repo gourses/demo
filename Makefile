@@ -46,8 +46,11 @@ ${GOLANGCI_LINT} ${COVMERGE}: ${GO} ## Install tools
 	@echo ${@:${TOOLS_DIR}/%=%} installed!
 
 build: ${GO} ## Build binary
-	${GO} build -o ${BUILD_OUTPUT} ${BUILD_TARGET}
+	CGO_ENABLED=0 ${GO} build -o ${BUILD_OUTPUT} ${BUILD_TARGET}
 	@echo Binary ${BUILD_OUTPUT} built successfully!
+
+image: build
+	docker build -t ${APP_NAME}:latest .
 
 lint: ${GOLANGCI_LINT}
 	${GOLANGCI_LINT} run
