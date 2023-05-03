@@ -67,6 +67,27 @@ make: *** [Makefile:53: lint] Error 1
 
 Running:
 ```sh
+$ make image
+```
+
+Should result into:
+```sh
+CGO_ENABLED=0 .tools/go/go1.20.3 build -o target/bin/demo ./cmd/demo
+Binary target/bin/demo built successfully!
+docker build -t demo:latest .
+Emulate Docker CLI using podman. Create /usr/etc/containers/nodocker to quiet msg.
+STEP 1/3: FROM scratch
+STEP 2/3: COPY /target/bin/demo /
+--> 053db692c185
+STEP 3/3: ENTRYPOINT ["/demo"]
+COMMIT demo:latest
+--> c0b8bb22e916
+Successfully tagged localhost/demo:latest
+c0b8bb22e916f9f4d8b0e861e9aef2c421d717722aeaae083c43dfb2df35a1c1
+```
+
+Running:
+```sh
 $ make show-coverage
 ```
 
