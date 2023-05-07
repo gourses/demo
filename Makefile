@@ -57,11 +57,11 @@ lint: ${GOLANGCI_LINT}
 
 unit-test: ${GO} ## Run unit tests
 	$(if $(dir ${COV_FILE_UNIT}),$(shell mkdir -p $(dir ${COV_FILE_UNIT})))
-	${GO} test -race -covermode atomic -coverprofile=${COV_FILE_UNIT} ./...
+	CGO_ENABLED=1 ${GO} test -race -covermode atomic -coverprofile=${COV_FILE_UNIT} ./...
 
 integration-test: ${GO} ## Run integration tests
 	$(if $(dir ${COV_FILE_INT}),$(shell mkdir -p $(dir ${COV_FILE_INT})))
-	${GO} test -race -covermode atomic -coverprofile=${COV_FILE_INT} -tags=integration -coverpkg=${COVERPKG_INT} ${BUILD_TARGET}
+	CGO_ENABLED=1 ${GO} test -race -covermode atomic -coverprofile=${COV_FILE_INT} -tags=integration -coverpkg=${COVERPKG_INT} ${BUILD_TARGET}
 
 merge-coverages: ${COVMERGE} unit-test integration-test ## Merge unit and integration coverages
 	${COVMERGE} ${COV_FILE_UNIT} ${COV_FILE_INT} > ${COV_FILE_TOTAL}
